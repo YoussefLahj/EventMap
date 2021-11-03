@@ -1,0 +1,70 @@
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+#mapid { 
+    position: absolute;
+    height: 50vh;
+    top: 15vh;
+    left: 30vw;
+}
+h1{
+    left: 50vw;
+    position: absolute;
+    color: white;
+}
+
+#Menu_icon{
+    width: 3vw;
+    height: 3vw;
+}
+
+#Menu_button{
+    position: absolute;
+    width: 3vw;
+    height: 3vw;
+    left: 0.5vw;
+    background: transparent;
+    border: transparent;
+}
+
+#Close_icon{
+    position: absolute;
+    width: 4vw;
+    height: 4vw;
+    left: 13vw;
+    top: 0.25vh;
+}
+
+#Close_button{
+    position: absolute;
+    width: 4vw;
+    height: 4vw;
+    left: 13vw;
+    top: 0.25vh;
+    background: transparent;
+    border: transparent;
+}
+
+#Menu_Lateral {
+    height: 100%; 
+    width: 0; 
+    position: fixed;
+    overflow: hidden; 
+    z-index: 1; 
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    background-color: rgb(180, 93, 35)
+}
+
+#Menu_Lateral p{
+    color: white;
+    font-size: 3vh;
+    padding-left: 5px;
+}
+
+body{
+    background: rgb(58, 56, 56);
+}
