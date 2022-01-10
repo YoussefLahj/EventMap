@@ -3,16 +3,37 @@
     to {opacity: 0;}
 }
 
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+p{
+    color: rgb(116, 116, 116);
+    position: absolute;
+    top: 6vh;
+    font-size: 1.5vw;
+    left: 42vw;
+}
+
 #mapid { 
     position: absolute;
-    height: 50vh;
+    height: 80vh;
     top: 15vh;
-    left: 30vw;
+    left: 25vw;
+    width: 60vw;
 }
 h1{
     left: 50vw;
     position: absolute;
     color: white;
+}
+
+button{
+    background: transparent;
+    border: transparent;
+    color: white;
+    font-size: 1.2vw;
 }
 
 #Menu_icon{
@@ -25,15 +46,13 @@ h1{
     width: 3vw;
     height: 3vw;
     left: 0.5vw;
-    background: transparent;
-    border: transparent;
 }
 
 #Close_icon{
     position: absolute;
     width: 4vw;
     height: 4vw;
-    left: 13vw;
+    left: 11vw;
     top: 0.25vh;
 }
 
@@ -41,10 +60,36 @@ h1{
     position: absolute;
     width: 4vw;
     height: 4vw;
-    left: 13vw;
+    left: 11vw;
     top: 0.25vh;
-    background: transparent;
-    border: transparent;
+}
+
+#Add_button{
+    position: absolute;
+    width: 14vw;
+    height: 5vh;
+    top: 11vh;
+}
+
+#Del_button{
+    position: absolute;
+    width: 14vw;
+    height: 5vh;
+    top: 17vh;
+}
+
+#Participate_button{
+    position: absolute;
+    width: 14vw;
+    height: 5vh;
+    top: 24vh;
+}
+
+#Disconnect_button{
+    position: absolute;
+    width: 14vw;
+    height: 5vh;
+    top: 30vh;
 }
 
 #Menu_Lateral {
@@ -65,6 +110,19 @@ h1{
     padding-left: 5px;
 }
 
+.fadeOut{
+    animation: fadeOut 0.5s;
+}
+
+.fadeIn{
+    animation: fadeIn 0.5s;
+}
+
+.buttonUI:hover{
+    background-color: rgb(197, 193, 193);
+}
+
 body{
-    background: rgb(58, 56, 56);
+    background: rgb(58, 40, 0);
+    user-select:none;
 }

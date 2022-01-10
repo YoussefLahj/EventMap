@@ -17,7 +17,7 @@
 <body>
     <h1>Event Map</h1>
     <div id="mainPage">
-        <div id="mapid" style="width: 920px; height: 600px;"></div>
+        <div id="mapid"></div>
 
         <div>
             <img id="Menu_icon" src="images/Menu_lateral.png">
@@ -28,24 +28,14 @@
     <div id="Menu_Lateral">
         <img id="Close_icon" src="images/close_icon.png">
         <button id="Close_button" onclick="closeMenu()"></button>
-        <p>Ajouter évènement</p>
-        <p>Supprimer évènement</p>
-        <p>Participer évènement</p>
-        <p>Deconnexion</p>
+        <button id="Add_button" class="buttonUI" onclick="addEvent()">Ajouter évènement</button>
+        <button id="Del_button" class="buttonUI" onclick="delEvent()">Supprimer évènement</button>
+        <button id="Participate_button" class="buttonUI" onclick="participateEvent()">Participer évènement</button>
+        <button id="Disconnect_button" class="buttonUI" onclick="disconnect()">Deconnexion</button>
     </div>
 
 </body>
 <script>
-    var mymap = L.map('mapid').setView([47.46667, -0.55], 13);
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1
-    }).addTo(mymap);
 </script>
 <script src="js/main.js"></script>
 
