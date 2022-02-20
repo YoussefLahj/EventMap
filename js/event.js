@@ -1,4 +1,4 @@
-document.getElementById("greetUser").innerHTML= "Bonjour, " +  localStorage.getItem("connected");
+document.getElementById("greetUser").innerHTML= "Bonjour " +  localStorage.getItem("connected") + " !";
 var bidouille=localStorage.getItem("connected");
 
 let menuIcon = document.getElementById("Menu_icon");
@@ -85,5 +85,6 @@ function participateEvent(){
 }
 
 function disconnect(){
-    console.log("disconnect");
+    localStorage.setItem("connected","");
+    window.location.href="main.html"
 }

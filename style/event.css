@@ -101,7 +101,7 @@ button{
     top: 0;
     left: 0;
     padding-top: 60px;
-    background-color: rgb(180, 93, 35)
+    background-color: #474bb8;
 }
 
 #Menu_Lateral p{
@@ -123,6 +123,6 @@ button{
 }
 
 body{
-    background: rgb(58, 40, 0);
+    background: #6aaeed;
     user-select:none;
 }
