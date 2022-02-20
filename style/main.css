@@ -1,128 +1,129 @@
-@keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+body {
+    --color-primary: #009579;
+    --color-primary-dark: #007f67;
+    --color-secondary: #252c6a;
+    --color-error: #cc3333;
+    --color-success: #4bb544;
+    --border-radius: 4px;
+
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background-size: cover;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.container {
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
 }
 
-p{
-    color: rgb(116, 116, 116);
-    position: absolute;
-    top: 6vh;
-    font-size: 1.5vw;
-    left: 42vw;
+.container,
+.form__input,
+.form__button {
+    font: 500 1rem 'Quicksand', sans-serif;
 }
 
-#mapid { 
-    position: absolute;
-    height: 80vh;
-    top: 15vh;
-    left: 25vw;
-    width: 60vw;
-}
-h1{
-    left: 50vw;
-    position: absolute;
-    color: white;
+.form--hidden {
+    display: none;
 }
 
-button{
-    background: transparent;
-    border: transparent;
-    color: white;
-    font-size: 1.2vw;
+.form > *:first-child {
+    margin-top: 0;
 }
 
-#Menu_icon{
-    width: 3vw;
-    height: 3vw;
+.form > *:last-child {
+    margin-bottom: 0;
 }
 
-#Menu_button{
-    position: absolute;
-    width: 3vw;
-    height: 3vw;
-    left: 0.5vw;
+.form__title {
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-#Close_icon{
-    position: absolute;
-    width: 4vw;
-    height: 4vw;
-    left: 11vw;
-    top: 0.25vh;
+.form__message {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-#Close_button{
-    position: absolute;
-    width: 4vw;
-    height: 4vw;
-    left: 11vw;
-    top: 0.25vh;
+.form__message--success {
+    color: var(--color-success);
 }
 
-#Add_button{
-    position: absolute;
-    width: 14vw;
-    height: 5vh;
-    top: 11vh;
+.form__message--error {
+    color: var(--color-error);
 }
 
-#Del_button{
-    position: absolute;
-    width: 14vw;
-    height: 5vh;
-    top: 17vh;
+.form__input-group {
+    margin-bottom: 1rem;
 }
 
-#Participate_button{
-    position: absolute;
-    width: 14vw;
-    height: 5vh;
-    top: 24vh;
+.form__input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-#Disconnect_button{
-    position: absolute;
-    width: 14vw;
-    height: 5vh;
-    top: 30vh;
+.form__input:focus {
+    border-color: var(--color-primary);
+    background: #ffffff;
 }
 
-#Menu_Lateral {
-    height: 100%; 
-    width: 0; 
-    position: fixed;
-    overflow: hidden; 
-    z-index: 1; 
-    top: 0;
-    left: 0;
-    padding-top: 60px;
-    background-color: rgb(180, 93, 35)
+.form__input--error {
+    color: var(--color-error);
+    border-color: var(--color-error);
 }
 
-#Menu_Lateral p{
-    color: white;
-    font-size: 3vh;
-    padding-left: 5px;
+.form__input-error-message {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-error);
 }
 
-.fadeOut{
-    animation: fadeOut 0.5s;
+.form__button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-primary);
 }
 
-.fadeIn{
-    animation: fadeIn 0.5s;
+.form__button:hover {
+    background: var(--color-primary-dark);
 }
 
-.buttonUI:hover{
-    background-color: rgb(197, 193, 193);
+.form__button:active {
+    transform: scale(0.98);
 }
 
-body{
-    background: rgb(58, 40, 0);
-    user-select:none;
+.form__text {
+    text-align: center;
 }
+
+.form__link {
+    color: var(--color-secondary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form__link:hover {
+    text-decoration: underline;
+} 

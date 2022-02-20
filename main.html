@@ -1,42 +1,53 @@
-<html>
-
+<!DOCTYPE html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <link rel="stylesheet" href="style/main.css" />
-
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <title>Login / Sign Up Form</title>
+    <link rel="stylesheet" href="style/main.css">
 </head>
-
 <body>
-    <h1>Event Map</h1>
-    <div id="mainPage">
-        <div id="mapid"></div>
-
-        <div>
-            <img id="Menu_icon" src="images/Menu_lateral.png">
-            <button id="Menu_button" onclick="openMenu()"></button>
-        </div>
+    <div class="container">
+        <form class="form" id="login">
+            <h1 class="form__title">Connexion</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="Nom d'utilisateur" id="username">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" autofocus placeholder="Mot de passe" id="password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="button" onclick="LogIn()">Se connecter</button>
+            <p class="form__text">
+                <a href="#" class="form__link">Mot de passe oublié?</a>
+            </p>
+            <p class="form__text">
+                <a class="form__link" href="./" id="linkCreateAccount">Vous n'avez pas de compte? Créer un compte ici</a>
+            </p>
+        </form>
+        <form class="form form--hidden" id="createAccount">
+            <h1 class="form__title">Créer un compte</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" id="signupUsername" class="form__input" autofocus placeholder="Nom d'utilisateur">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="text" id="signupEmail" class="form__input" autofocus placeholder="Email">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" id="signupPassword" class="form__input" autofocus placeholder="Mot de passe">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" id="signupPasswordConfirmation" class="form__input" autofocus placeholder="Confirmation du Mot de passe">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" id="jesuislebutton" onclick="SignUp()" disabled>S'enregistrer</button>
+            <p class="form__text">
+                <a class="form__link" href="./" id="linkLogin">Vous avez déjà un compte? Connectez-vous</a>
+            </p>
+        </form>
     </div>
-
-    <div id="Menu_Lateral">
-        <img id="Close_icon" src="images/close_icon.png">
-        <button id="Close_button" onclick="closeMenu()"></button>
-        <button id="Add_button" class="buttonUI" onclick="addEvent()">Ajouter évènement</button>
-        <button id="Del_button" class="buttonUI" onclick="delEvent()">Supprimer évènement</button>
-        <button id="Participate_button" class="buttonUI" onclick="participateEvent()">Participer évènement</button>
-        <button id="Disconnect_button" class="buttonUI" onclick="disconnect()">Deconnexion</button>
-    </div>
-
+    <script src="js/main.js"></script>
 </body>
-<script>
-</script>
-<script src="js/main.js"></script>
-
-</html>

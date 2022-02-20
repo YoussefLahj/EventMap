@@ -1,86 +1,128 @@
-let menuIcon = document.getElementById("Menu_icon");
-let markerTab = [];
-let titleTab = [];
-let descTab = [];
-let firstEnter = true;
-let click = false;
-var mymap = L.map('mapid').setView([47.46667, -0.55], 13);
-var popup = L.popup();
-var marker = 0;
+function SignUp(){
+    event.preventDefault();
+    var email=document.getElementById('signupEmail').value;
+    var username=document.getElementById('signupUsername').value;
+    var password= document.getElementById('signupPassword').value;
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(mymap);
+    var user= {
+        email:email,
+        username:username,
+        password:password,
+    };
 
-function onMapClick(e) {
-    let title;
-    let desc;
-    if(click){
-        marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);   //marker.latlng.lat
-        markerTab.push(marker);
-        title = window.prompt("Saisissez un titre à votre évènement");
-        titleTab.push(title);
-        desc = window.prompt("Saisissez la description de votre évènement");
-        descTab.push(desc);
-    }
-    if(marker != 0){
-        marker.addEventListener("click", function(){
-            console.log("marker clicked");
-            for(let i = 0; i < markerTab.length; i++){
-                if(e.latlng.lat == markerTab[i]._latlng.lat && e.latlng.lng == markerTab[i]._latlng.lng){
-                    markerTab[i].bindPopup("<b>"+titleTab[i]+"</b><br>"+descTab[i]+".").openPopup();
-                }
-            }
-        });
-    }
-}
-mymap.on('click', onMapClick);
-
-function openMenu(){
-    document.getElementById("Menu_Lateral").style.width = "15vw";
-    document.getElementById("mainPage").style.marginLeft = "15vw";
+    var json=JSON.stringify(user);
+    localStorage.setItem(username,json);
     
-    if(firstEnter){
-        firstEnter = false;
-        menuIcon.classList.add("fadeOut");
+    let loginForm = document.getElementById("login");
+    let createAccountForm = document.getElementById("createAccount");
+
+    loginForm.classList.remove("form--hidden");
+    createAccountForm.classList.add("form--hidden");
+    document.getElementById("signupUsername").value="";
+    document.getElementById("signupEmail").value="";
+    document.getElementById("signupPassword").value="";
+    document.getElementById("signupPasswordConfirmation").value="";
+
+}
+
+function LogIn(){
+    for (var i = 0; i < localStorage.length; i++){
+
+        if(localStorage.key(i)==document.getElementById('username').value)
+        {
+            if(JSON.parse(localStorage.getItem(localStorage.key(i))).password==document.getElementById('password').value)
+            {
+                localStorage.setItem("connected",localStorage.key(i))
+                window.location.href="event.html"
+            }
+            
+        }
     }
-    else{
-        menuIcon.classList.replace("fadeIn", "fadeOut");
-    }
-    menuIcon.style.opacity = 0;
 }
 
-function closeMenu(){
-    document.getElementById("Menu_Lateral").style.width = "0";
-    document.getElementById("mainPage").style.marginLeft = "0";
-    menuIcon.classList.replace("fadeOut", "fadeIn");
-    menuIcon.style.opacity = 1;
-    click = false;
+function setFormMessage(formElement, type, message) {
+    const messageElement = formElement.querySelector(".form__message");
+
+    messageElement.textContent = message;
+    messageElement.classList.remove("form__message--success", "form__message--error");
+    messageElement.classList.add(`form__message--${type}`);
 }
 
-function addEvent(){
-    let consigne = document.createElement("p");
-    consigne.textContent = "Cliquez sur la carte pour ajouter un evenement";
-    document.body.appendChild(consigne);
-    setTimeout(function(){
-        consigne.textContent = "";
-    },4000);
-    click = true;
+function setInputError(inputElement, message) {
+    inputElement.classList.add("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
 }
 
-function delEvent(){
-    console.log("del");
+function clearInputError(inputElement) {
+    inputElement.classList.remove("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
 }
 
-function participateEvent(){
-    console.log("participate");
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector("#login");
+    const createAccountForm = document.querySelector("#createAccount");
 
-function disconnect(){
-    console.log("disconnect");
-}
+    document.querySelector("#linkCreateAccount").addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.add("form--hidden");
+        createAccountForm.classList.remove("form--hidden");
+    });
+
+    document.querySelector("#linkLogin").addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.remove("form--hidden");
+        createAccountForm.classList.add("form--hidden");
+    });
+
+   /*loginForm.addEventListener("submit", e => {
+        e.preventDefault();
+
+        // Perform your AJAX/Fetch login
+
+        setFormMessage(loginForm, "error", "Invalid username/password combination");
+    });*/
+
+
+var booluser=true;
+var boolemail=true;
+var boolpass2=true;
+
+    document.querySelectorAll(".form__input").forEach(inputElement => {
+        inputElement.addEventListener("keyup", e => {
+            booluser=true;
+            boolemail=true;
+            boolpass2=true;
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 4 ) {
+                setInputError(inputElement, "Le nom d'utilisateur doit contenir 4 caractères.");
+                booluser=false;
+                document.getElementById("jesuislebutton").setAttribute("disabled","");
+            }
+
+            if (e.target.id === "signupEmail" && e.target.value.length < 0 ) {
+                setInputError(inputElement, "Champ obligatoire.");
+                boolemail=false;
+                document.getElementById("jesuislebutton").setAttribute("disabled","");
+
+            }
+            
+            
+            if(e.target.id === "signupPasswordConfirmation" && e.target.value.length > 0 && document.getElementById("signupPasswordConfirmation").value!=document.getElementById("signupPassword").value)
+            {
+                setInputError(inputElement, "Les mots de passe ne sont pas identiques.");
+                boolpass2=false;
+                document.getElementById("jesuislebutton").setAttribute("disabled","");
+
+            }
+            if(booluser && boolpass2 && boolemail && document.getElementById("signupUsername").value!="" && document.getElementById("signupPasswordConfirmation").value!="" && document.getElementById("signupPassword").value!="" && document.getElementById("signupEmail").value!="")
+            {
+                clearInputError(inputElement);
+                document.getElementById("jesuislebutton").removeAttribute("disabled");
+            }
+
+        });
+
+        inputElement.addEventListener("input", e => {
+            clearInputError(inputElement);
+        });
+    });
+}); 
