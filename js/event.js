@@ -1,18 +1,17 @@
 document.getElementById("greetUser").innerHTML= "Bonjour " +  localStorage.getItem("connected") + " !";
-var bidouille=localStorage.getItem("connected");
-
 let menuIcon = document.getElementById("Menu_icon");
 let markerTab = [];
 let titleTab = [];
 let descTab = [];
 let nbParticipantTab = [];
 let firstEnter = true;
-let click = false;
+let clickToAdd = false;
 let clickToDell = false;
 let clickToBe = false;
 var mymap = L.map('mapid').setView([47.46667, -0.55], 13);
 var popup = L.popup();
 var marker = 0;
+var nbParticipant=0;
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -26,14 +25,15 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 function onMapClick(e) {
     let title;
     let desc;
-    if (click) {
+    if (clickToAdd) {
         marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);   //marker.latlng.lat
         markerTab.push(marker);
-        title = window.prompt("Saisissez un titre à votre évènement");
+        title = window.prompt("Saisissez un titre à votre événement");
         titleTab.push(title);
-        desc = window.prompt("Saisissez la description de votre évènement");
+        desc = window.prompt("Saisissez la description de votre événement");
         descTab.push(desc);
-        nbParticipantTab.push(0);
+        nbParticipantTab.push(nbParticipant);
+        marker.bindPopup("<b>" + title + "</b><br>" + desc + "." + "<br>Nombre de personnes inscrites : " + nbParticipant);
     }
     if (marker != 0) {
         var index = 0;
@@ -41,9 +41,10 @@ function onMapClick(e) {
             console.log("marker clicked");
             for (let i = 0; i < markerTab.length; i++) {
                 if (e.latlng.lat == markerTab[i]._latlng.lat && e.latlng.lng == markerTab[i]._latlng.lng) {
-                    markerTab[i].bindPopup("<b>" + titleTab[i] + "</b><br>" + descTab[i] + "." + "<br>Nombre de personne inscrite : " + nbParticipantTab[i]).openPopup();
+                    markerTab[i].openPopup();
                     index = i;
                 }
+               
             }
 
             if (clickToDell) {
@@ -56,9 +57,10 @@ function onMapClick(e) {
             }
 
             if(clickToBe){
-                //console.log(nbParticipantTab[index]);
+                console.log(index);
                 nbParticipantTab[index]+=1;
-                //console.log(nbParticipantTab[index]);
+                markerTab[index].bindPopup("<b>" + titleTab[index] + "</b><br>" + descTab[index] + "." + "<br>Nombre de personnes inscrites : " + nbParticipantTab[index]);
+                console.log(nbParticipantTab[index]);
             }
         });
     }
@@ -84,19 +86,19 @@ function closeMenu() {
     document.getElementById("mainPage").style.marginLeft = "0";
     menuIcon.classList.replace("fadeOut", "fadeIn");
     menuIcon.style.opacity = 1;
-    click = false;
+    clickToAdd = false;
     clickToDell = false;
     clickToBe=false;
 }
 
 function addEvent() {
     let consigne = document.createElement("p");
-    consigne.textContent = "Cliquez sur la carte pour ajouter un evenement";
+    consigne.textContent = "Cliquez sur la carte pour ajouter un événement";
     document.body.appendChild(consigne);
     setTimeout(function () {
         consigne.textContent = "";
     }, 4000);
-    click = true;
+    clickToAdd = true;
     clickToDell = false;
     clickToBe=false;
 }
@@ -109,28 +111,29 @@ function delEvent() {
     Menu_Lateral.insertBefore(btn_Done,btn_Del);*/
 
     let indication = document.createElement("p");
-    indication.textContent = "Cliquez sur l'evenement que vous voulez supprimer";
+    indication.textContent = "Cliquez sur l'événement que vous voulez supprimer";
     document.body.appendChild(indication);
     setTimeout(function () {
         indication.textContent = "";
     }, 4000);
     clickToDell = true;
-    click = false;
+    clickToAdd = false;
     clickToBe=false;
 }
 
 function participateEvent() {
     let indication = document.createElement("p");
-    indication.textContent = "Cliquez sur l'evenement auquel vous voulez participer";
+    indication.textContent = "Cliquez sur l'événement auquel vous voulez participer";
     document.body.appendChild(indication);
     setTimeout(function () {
         indication.textContent = "";
     }, 4000);
     clickToBe=true;
     clickToDell = false;
-    click = false;
+    clickToAdd = false;
 }
 
 function disconnect() {
-    console.log("disconnect");
+    localStorage.setItem("connected","");
+    window.location.href="main.html"
 }
